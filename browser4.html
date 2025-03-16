@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>browser outputs</title>
+    <style>
+        body {
+            background: black;
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            color: white;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+        }
+        h1 {
+            font-size: 4em;
+            font-weight: normal;
+        }
+        .title span:nth-child(1) { color: #90ee90; }
+        .title span:nth-child(2) { color: #32cd32; }
+        .title span:nth-child(3) { color: #008000; }
+        .title span:nth-child(4) { color: #90ee90; }
+        .title span:nth-child(5) { color: #32cd32; }
+        .title span:nth-child(6) { color: #008000; }
+        .title span:nth-child(7) { color: #90ee90; }
+        .lesson-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .lesson-title {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        button {
+            background: none;
+            border: 1px solid white;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        select, input {
+            background: black;
+            color: white;
+            border: 1px solid white;
+            padding: 10px;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .calc-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .result-box {
+            background: black;
+            color: white;
+            border: 1px solid white;
+            padding: 10px;
+            min-width: 50px;
+            text-align: center;
+        }
+        .output-box {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid white;
+            min-width: 100px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function showBand() {
+            const song = document.getElementById("songSelect").value;
+            let band;
+            switch(song) {
+                case "sugar, we're goin down":
+                    band = "fall out boy";
+                    break;
+                case "dear maria, count me in":
+                    band = "all time low";
+                    break;
+                case "i write sins not tragedies":
+                    band = "panic! at the disco";
+                    break;
+                case "misery business":
+                    band = "paramore";
+                    break;
+                default:
+                    band = "unknown band";
+            }
+            alert(band);
+        }
+        
+        function calculateAddition() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById("result").innerText = "error";
+                return;
+            }
+            const result = num1 + num2;
+            document.getElementById("result").innerText = result;
+        }
+
+        function runLoop() {
+            let count = 1;
+            let output = "";
+            do {
+                output += "loop iteration: " + count + "<br>";
+                count++;
+            } while (count <= 5);
+            document.getElementById("loopOutput").innerHTML = output;
+        }
+    </script>
+</head>
+<body>
+    <h1 class="title">
+        <span>b</span><span>r</span><span>o</span><span>w</span><span>s</span><span>e</span><span>r</span>
+        <span>o</span><span>u</span><span>t</span><span>p</span><span>u</span><span>t</span>
+    </h1>
+    
+    <div class="lesson-container">
+        <div class="lesson-title">lesson 1: events</div>
+        <button onclick="alert('hello')">hi</button>
+    </div>
+    
+    <div class="lesson-container">
+        <div class="lesson-title">lesson 2: conditional statements</div>
+        <form onsubmit="event.preventDefault(); showBand();">
+            <select id="songSelect">
+                <option value="sugar, we're goin down">sugar, we're goin down</option>
+                <option value="dear maria, count me in">dear maria, count me in</option>
+                <option value="i write sins not tragedies">i write sins not tragedies</option>
+                <option value="misery business">misery business</option>
+            </select>
+            <button type="submit">submit</button>
+        </form>
+    </div>
+    
+    <div class="lesson-container">
+        <div class="lesson-title">lesson 3: switch statements</div>
+        <div class="calc-container">
+            <input type="number" id="num1" placeholder="enter first number">
+            <span>+</span>
+            <input type="number" id="num2" placeholder="enter second number">
+            <span>=</span>
+            <div id="result" class="result-box">0</div>
+        </div>
+        <button onclick="calculateAddition()">calculate</button>
+    </div>
+
+    <div class="lesson-container">
+        <div class="lesson-title">lesson 4: loops</div>
+        <button onclick="runLoop()">run loop</button>
+        <div id="loopOutput" class="output-box"></div>
+    </div>
+</body>
+</html>
